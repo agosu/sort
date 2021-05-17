@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SortAPI.Services;
+using System;
 using System.Collections;
+using System.Diagnostics;
 
 namespace Sort.Controllers
 {
@@ -24,15 +26,32 @@ namespace Sort.Controllers
         public IActionResult DoSort([FromBody] long[] sortRequest)
         {
             _logger.LogInformation("A new set of numbers posted for sorting.");
-            ArrayList sortedNumbers = _sortService.Sort(new ArrayList(sortRequest));
-            _storageService.StoreNewResult(sortedNumbers);
-            return Ok();
+            if (sortRequest.Length != 0)
+            {
+                var watch = Stopwatch.StartNew();
+                ArrayList sortedNumbers = _sortService.Sort(new ArrayList(sortRequest));
+                watch.Stop();
+                var performance = watch.ElapsedMilliseconds;
+                _storageService.StoreNewResult(sortedNumbers);
+                _storageService.StorePerformance(performance);
+                return Ok("Array is sorted and saved, to retrieve it, call GET endpoint. Call GET /performance to see the latest sorting performance.");
+            }
+
+            return BadRequest("Array cannot be empty.");
         }
 
         [HttpGet]
         public ArrayList GetLatestResult()
         {
+            _logger.LogInformation("Latest sorting result is being retrieved.");
             return _storageService.GetLatestResult();
+        }
+
+        [HttpGet("performance")]
+        public long GetLatestPerformance()
+        {
+            _logger.LogInformation("Latest sorting performance is being retrieved.");
+            return _storageService.GetLatestPerformance();
         }
     }
 }

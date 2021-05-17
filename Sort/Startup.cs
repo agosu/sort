@@ -20,7 +20,7 @@ namespace Sort
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton<ISortService, SelectionSortService>();
+            services.AddSingleton<ISortService, BubbleSortService>();
             services.AddSingleton<IStorageService, FileService>();
         }
 
