@@ -20,8 +20,8 @@ namespace Sort
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<ISortService, SelectionSortService>();
-            services.AddScoped<IStorageService, FileService>();
+            services.AddSingleton<ISortService, SelectionSortService>();
+            services.AddSingleton<IStorageService, FileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
