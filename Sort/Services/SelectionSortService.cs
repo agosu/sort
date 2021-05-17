@@ -3,26 +3,29 @@ using SortAPI.Helpers;
 
 namespace SortAPI.Services
 {
-    public class BubbleSortService : ISortService
+    public class SelectionSortService : ISortService
     {
         public ArrayList Sort(ArrayList numbers)
         {
             for (var i = 0; i < numbers.Count - 1; i++)
             {
-                for (var j = 0; j < numbers.Count - 1; j++)
+                var minimum = i;
+                for (var j = i + 1; j < numbers.Count; j++)
                 {
-                    if ((long) numbers[j] > (long) numbers[j + 1])
+                    if ((long) numbers[j] < (long) numbers[minimum])
                     {
-                        numbers.Swap(j, j + 1);
+                        minimum = j;
                     }
                 }
+                numbers.Swap(minimum, i);
             }
+
             return numbers;
         }
 
         public string GetName()
         {
-            return "Bubble Sort";
+            return "Selection Sort";
         }
     }
 }
