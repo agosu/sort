@@ -1,6 +1,10 @@
-﻿namespace SortAPI.Services
+﻿using System.Collections;
+
+namespace SortAPI.Services
 {
-    interface ISortService
+    public interface ISortService
     {
+        public ArrayList Sort(ArrayList unsorted);
+        public string GetName();
     }
 }
