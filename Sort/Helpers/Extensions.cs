@@ -6,7 +6,7 @@ namespace SortAPI.Helpers
     {
         public static void Swap(this ArrayList arrayList, int i, int j)
         {
-            long temp = (long)arrayList[i];
+            var temp = arrayList[i];
             arrayList[i] = arrayList[j];
             arrayList[j] = temp;
         }

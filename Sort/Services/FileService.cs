@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Collections;
-using System.Threading.Tasks;
 
 namespace SortAPI.Services
 {
@@ -10,15 +9,22 @@ namespace SortAPI.Services
 
         public void StoreNewResult(ArrayList result)
         {
-            using StreamWriter file = new StreamWriter(_path);
-            for (var i = 0; i < result.Count; i++)
+            if (result != null)
             {
-                file.Write(result[i].ToString());
-                if (i < result.Count - 1)
+                using StreamWriter file = new StreamWriter(_path);
+                for (var i = 0; i < result.Count; i++)
                 {
-                    file.Write(" ");
+                    file.Write(result[i].ToString());
+                    if (i < result.Count - 1)
+                    {
+                        file.Write(" ");
+                    }
                 }
+            } else
+            {
+                throw new InvalidDataException("Cannot store null result.");
             }
+            
         }
 
         public ArrayList GetLatestResult()

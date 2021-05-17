@@ -7,17 +7,22 @@ namespace SortAPI.Services
     {
         public ArrayList Sort(ArrayList numbers)
         {
-            for (var i = 0; i < numbers.Count - 1; i++)
+            if (numbers != null)
             {
-                for (var j = 0; j < numbers.Count - 1; j++)
+                for (var i = 0; i < numbers.Count - 1; i++)
                 {
-                    if ((long) numbers[j] > (long) numbers[j + 1])
+                    for (var j = 0; j < numbers.Count - 1; j++)
                     {
-                        numbers.Swap(j, j + 1);
+                        if ((long)numbers[j] > (long)numbers[j + 1])
+                        {
+                            numbers.Swap(j, j + 1);
+                        }
                     }
                 }
+                return numbers;
             }
-            return numbers;
+
+            return null;
         }
 
         public string GetName()
