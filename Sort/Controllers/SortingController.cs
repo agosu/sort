@@ -24,6 +24,10 @@ namespace Sort.Controllers
         [HttpPost]
         public IActionResult DoSort([FromBody] long[] sortRequest)
         {
+            //TODO: In a more complex solution it would be logical to
+            //make sorting an async task and immediately return status
+            //(that posting was successful or not). Sorting status storing
+            //and retrieving also would be needed for user information.
             _logger.LogInformation("A new set of numbers posted for sorting.");
             if (sortRequest.Length != 0)
             {
