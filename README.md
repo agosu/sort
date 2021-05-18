@@ -9,5 +9,5 @@ There are two sorting algorithms implemented:
 * Bubble Sort
 * Selection Sort <br>
 
-## TestSort
+## SortTest
 Contains tests for the SortAPI functionality
